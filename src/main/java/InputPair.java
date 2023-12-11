@@ -4,7 +4,7 @@ public class InputPair {
     double time_elapse;
     protected char input;
 
-    public InputPair(char input, double continuousTime, int discreteTime) {
+    public InputPair(double continuousTime, int discreteTime, char input) {
         this.input = input;
         this.continuousTime = continuousTime;
         this.discreteTime = discreteTime;

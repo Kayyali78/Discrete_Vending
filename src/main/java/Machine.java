@@ -5,6 +5,12 @@ public class Machine {
     double continuousTime = 0.0;
     int[] outCounts = new int[3];
     InputPair inputPair;
+
+
+    /*
+    This program is a simulation of a coffee machine. It takes in a single input at a time consisting of nickels, dimes, and quarters.
+    It outputs a coffee for every 100 cents and gives change in the form of quarters, dimes, and nickels.
+     */
     public void main(String[] args){
         state = new State(0,0,0,0);
         startSimulation();
@@ -14,7 +20,13 @@ public class Machine {
     }
 
     private void startSimulation(){
-        
+        if (inputPair.continuousTime < continuousTime){
+            deltaExternal(inputPair);
+        } else if (inputPair.continuousTime == continuousTime){
+            deltaConfluent(inputPair);
+        } else {
+            deltaInternal();
+        }
     }
 
     private double timeAdvance(){
@@ -26,13 +38,14 @@ public class Machine {
     }
 
     private void lambda(){
-        //sout coffee dispensed for every 100 value AND combination of q,n,d of change representing v%100
+        //sout coffee for 100 value AND combination of q,n,d of change representing v%100
         while (state.v>=100){
             System.out.println("Coffee dispensed");
             state.v-=100;
             change();
         }
     }
+
     private void deltaInternal(){
         change();
         timeAdvance();
